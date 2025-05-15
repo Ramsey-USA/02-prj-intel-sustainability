@@ -1,1 +1,126 @@
-/* Add your CSS here */
+/* Intel color scheme variables and basic styles */
+:root {
+  /* Color variables */
+  --intel-blue: #0071c5;        /* Main Intel blue */
+  --intel-light-blue: #00a9e0;  /* Lighter blue */
+  --intel-dark-blue: #003057;   /* Dark blue */
+  --intel-gray: #e6e6e6;        /* Light gray */
+  --intel-white: #ffffff;       /* White */
+
+  /* Font family */
+  --font-main: 'Segoe UI', Arial, sans-serif;
+
+  /* Font sizes */
+  --font-size-base: 16px;
+  --font-size-large: 2em;
+  --font-size-medium: 1.2em;
+  --font-size-small: 1em;
+
+  /* Margins and padding */
+  --margin-base: 16px;
+  --margin-small: 8px;
+  --padding-base: 16px;
+  --padding-small: 8px;
+}
+
+/* Apply the main font and base font size to the whole page */
+body {
+  font-family: var(--font-main);    /* Use the main font */
+  font-size: var(--font-size-base); /* Set the base font size */
+  margin: 0;                        /* Remove default margin */
+  background: var(--intel-white);   /* Set background color */
+  color: var(--intel-dark-blue);    /* Set default text color */
+}
+
+/* Header styles for the top of the page */
+header {
+  background-color: var(--intel-blue); /* Use Intel blue for header background */
+  color: var(--intel-white);           /* White text in the header */
+  padding: 30px 10px;                  /* Add space inside the header */
+  text-align: center;                  /* Center all content in the header */
+}
+
+/* Style the Intel logo inside the header */
+header img {
+  width: 150px;                        /* Set a simple width for the logo */
+  display: block;                      /* Make the image a block element */
+  margin: 0 auto 16px auto;            /* Center the logo and add space below */
+}
+
+/* Main heading in the header */
+header h1 {
+  font-size: 2em;                      /* Make the heading large */
+  margin-bottom: 12px;                 /* Space below the heading */
+}
+
+/* Description text in the header */
+header p {
+  font-size: 1.1em;                    /* Slightly larger text */
+  margin-bottom: 0;                    /* No extra space below paragraph */
+}
+
+/* Hero section styles */
+.hero {
+  background-color: var(--intel-blue); /* Use Intel blue for background */
+  color: var(--intel-white); /* White text */
+  padding: 60px 20px; /* Space inside the hero section */
+  text-align: center; /* Center the text */
+}
+
+/* Style the Intel logo in the hero section */
+.hero img {
+  width: 180px; /* Set a simple width for the logo */
+  display: block; /* Make the image a block element */
+  margin: 0 auto 20px auto; /* Center the logo and add space below */
+}
+
+.hero h1 {
+  font-size: 2.5em; /* Large heading */
+  margin-bottom: 20px; /* Space below heading */
+}
+
+.hero p {
+  font-size: 1.2em; /* Slightly larger text */
+  margin-bottom: 0; /* No extra space below paragraph */
+}
+
+/* Timeline section styles */
+.timeline {
+  background-color: var(--intel-gray); /* Light gray background */
+  padding: 40px 20px; /* Space inside the timeline section */
+}
+
+/* Style images inside the timeline section */
+.timeline img {
+  width: 100%; /* Make images fill the card width */
+  max-width: 250px; /* Limit image width */
+  display: block; /* Block display for spacing */
+  margin: 10px auto; /* Center images with margin */
+  border-radius: 8px; /* Slightly rounded corners */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05); /* Soft shadow for effect */
+}
+
+.timeline h2 {
+  color: var(--intel-dark-blue); /* Dark blue heading */
+  text-align: center; /* Center the heading */
+  margin-bottom: 30px; /* Space below heading */
+}
+
+.timeline-list {
+  list-style: none; /* Remove default bullets */
+  padding: 0; /* Remove default padding */
+  max-width: 600px; /* Limit width for readability */
+  margin: 0 auto; /* Center the list */
+}
+
+.timeline-list li {
+  background-color: var(--intel-white); /* White background for each item */
+  border-left: 4px solid var(--intel-light-blue); /* Blue line on the left */
+  margin-bottom: 20px; /* Space between items */
+  padding: 16px 20px; /* Space inside each item */
+  position: relative; /* For future enhancements */
+}
+
+.timeline-list li:last-child {
+  margin-bottom: 0; /* No space after last item */
+}
