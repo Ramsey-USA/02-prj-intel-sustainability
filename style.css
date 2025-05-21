@@ -1,3 +1,12 @@
+/* Import Intel One Mono font for beginners */
+/* Make sure the path matches your project structure */
+@font-face {
+  font-family: 'Intel One Mono';
+  src: url('fonts/ttf/fonts/ttf/IntelOneMono-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 /* Intel color scheme variables and basic styles */
 :root {
   /* Color variables */
@@ -8,7 +17,7 @@
   --intel-white: #ffffff;       /* White */
 
   /* Font family */
-  --font-main: 'Segoe UI', Arial, sans-serif;
+  --font-main: 'Intel One Mono', 'Segoe UI', Arial, sans-serif; /* Use Intel One Mono first */
 
   /* Font sizes */
   --font-size-base: 16px;
@@ -25,7 +34,7 @@
 
 /* Apply the main font and base font size to the whole page */
 body {
-  font-family: var(--font-main);    /* Use the main font */
+  font-family: var(--font-main);    /* Use Intel One Mono font */
   font-size: var(--font-size-base); /* Set the base font size */
   margin: 0;                        /* Remove default margin */
   background: var(--intel-white);   /* Set background color */
