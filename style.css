@@ -92,32 +92,39 @@ header p {
   overflow-x: auto;   /* Enable horizontal scrolling if needed */
 }
 
-/* Timeline cards container for horizontal layout */
+/* Timeline cards container for horizontal layout with smooth scroll snapping */
 .timeline-cards {
-  display: flex;              /* Arrange cards in a row */
-  gap: 20px;                  /* Space between cards */
-  flex-wrap: nowrap;          /* Prevent wrapping on large screens */
-  overflow-x: auto;           /* Allow horizontal scroll */
-  padding-bottom: 16px;       /* Space below cards for scroll bar */
+  display: flex;                  /* Arrange cards in a row */
+  gap: 32px;                      /* More space between cards for visual enhancement */
+  flex-wrap: nowrap;              /* Keep all cards in a single line */
+  overflow-x: auto;               /* Allow horizontal scroll if needed */
+  padding-bottom: 24px;           /* Extra space below cards for scroll bar */
+  justify-content: flex-start;    /* Align cards to the left */
+  width: 100%;                    /* Full width of the container */
+  box-sizing: border-box;         /* Include padding in width */
+  scroll-behavior: smooth;        /* Smooth scrolling on all platforms */
+  scroll-snap-type: x mandatory;  /* Enable horizontal scroll snapping */
 }
 
-/* Individual timeline card */
+/* Each timeline card will snap to the start of the container */
 .timeline-card {
-  background-color: var(--intel-white);         /* White background */
-  border-left: 4px solid var(--intel-light-blue); /* Blue line on the left */
-  min-width: 250px;                             /* Minimum width for card */
-  max-width: 300px;                             /* Maximum width for card */
-  padding: 16px 20px;                           /* Space inside card */
-  margin-bottom: 0;                             /* Remove bottom margin for horizontal */
-  box-sizing: border-box;                       /* Include padding in width */
-  flex-shrink: 0;                               /* Prevent shrinking */
-  border-radius: 8px;                           /* Rounded corners */
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);       /* Soft shadow */
+  scroll-snap-align: start;       /* Snap each card to the start */
+  position: relative; /* Needed for overlay positioning */
+  background-color: var(--intel-white);
+  border-left: 4px solid var(--intel-light-blue);
+  min-width: 250px;
+  max-width: 300px;
+  padding: 16px 20px 20px 20px;
+  margin-bottom: 0;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: relative;                           /* Needed for details reveal */
   transition: box-shadow 0.3s;
+  cursor: pointer; /* Pointer cursor for interactivity */
 }
 
 /* Timeline images */
@@ -127,6 +134,8 @@ header p {
   display: block;                     /* Block display for spacing */
   margin: 10px auto;                  /* Center images with margin */
   border-radius: 8px;                 /* Slightly rounded corners */
+  position: relative; /* Needed for stacking context */
+  z-index: 1;
 }
 
 /* Timeline headings */
@@ -149,13 +158,44 @@ header p {
   opacity: 0;                         /* Make invisible */
   transition: max-height 0.4s ease, opacity 0.4s ease;
   width: 100%;
+  transform: translate(-50%, 0) scale(0.98); /* Scale down for effect */
+  transition: opacity 0.4s, transform 0.4s; /* Smooth transition */
 }
 
 /* Show details when hovering over the card */
 .timeline-card:hover .timeline-details,
 .timeline-card:focus-within .timeline-details {
-  max-height: 200px;                  /* Enough space for content */
-  opacity: 1;                         /* Make visible */
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, 0) scale(1);    /* Scale up to normal size */
+}
+
+/* Overlay styles for details */
+.timeline-details {
+  position: absolute; /* Position over the image */
+  top: 38%;           /* Start overlay a bit below the top of the card */
+  left: 50%;
+  transform: translate(-50%, 0);
+  width: 90%;
+  background: rgba(0, 49, 87, 0.92); /* Semi-transparent Intel dark blue */
+  color: var(--intel-white);
+  padding: 12px;
+  border-radius: 8px;
+  opacity: 0;         /* Hide by default */
+  pointer-events: none; /* Prevent accidental clicks */
+  transition: opacity 0.4s;
+  z-index: 2;         /* Above the image */
+  text-align: center;
+  max-height: 80%;    /* Prevent overlay from being too tall */
+  overflow-y: auto;   /* Scroll if content is too big */
+}
+
+/* Show overlay on hover or focus */
+.timeline-card:hover .timeline-details,
+.timeline-card:focus-within .timeline-details {
+  opacity: 1;         /* Show overlay */
+  pointer-events: auto; /* Allow interaction */
+  transform: translate(-50%, 0) scale(1); /* Scale to normal size */
 }
 
 /* Responsive: Stack timeline vertically on small screens */
@@ -163,6 +203,9 @@ header p {
   .timeline-cards {
     display: block;         /* Stack cards vertically */
     overflow-x: visible;    /* No horizontal scroll */
+    gap: 0;                 /* Remove gap for vertical layout */
+    padding-bottom: 0;
+    scroll-snap-type: none; /* Disable snapping on small screens */
   }
   .timeline-card {
     max-width: 100%;        /* Full width */
@@ -170,6 +213,12 @@ header p {
   }
   .timeline-card:last-child {
     margin-bottom: 0;
+  }
+  .timeline-details {
+    top: 38%;
+    left: 50%;
+    width: 90%;
+    font-size: 1em;
   }
 }
 
