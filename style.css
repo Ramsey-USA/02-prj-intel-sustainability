@@ -34,29 +34,30 @@ body {
 
 /* Header styles for the top of the page */
 header {
-  background-color: var(--intel-blue); /* Use Intel blue for header background */
-  color: var(--intel-white);           /* White text in the header */
-  padding: 30px 10px;                  /* Add space inside the header */
-  text-align: center;                  /* Center all content in the header */
+  background-color: var(--intel-blue); /* Intel blue background */
+  color: var(--intel-white);           /* White text for contrast */
+  padding: var(--padding-base) var(--padding-small); /* Space inside header */
+  text-align: center;                  /* Center all content */
 }
 
-/* Style the Intel logo inside the header */
+/* Intel logo in the header */
 header img {
-  width: 150px;                        /* Set a simple width for the logo */
-  display: block;                      /* Make the image a block element */
-  margin: 0 auto 16px auto;            /* Center the logo and add space below */
+  width: 150px;                        /* Set logo width */
+  display: block;                      /* Make image a block element */
+  margin: 0 auto var(--margin-base) auto; /* Center logo and add space below */
 }
 
-/* Main heading in the header */
+/* Main headline in the header */
 header h1 {
-  font-size: 2em;                      /* Make the heading large */
-  margin-bottom: 12px;                 /* Space below the heading */
+  font-size: var(--font-size-large);   /* Large headline */
+  margin-bottom: var(--margin-small);  /* Space below headline */
+  font-weight: bold;                   /* Make headline bold */
 }
 
-/* Description text in the header */
+/* Subheading/description in the header */
 header p {
-  font-size: 1.1em;                    /* Slightly larger text */
-  margin-bottom: 0;                    /* No extra space below paragraph */
+  font-size: var(--font-size-medium);  /* Medium-sized text */
+  margin-bottom: 0;                    /* No extra space below */
 }
 
 /* Hero section styles */
@@ -88,6 +89,88 @@ header p {
 .timeline {
   background-color: var(--intel-gray); /* Light gray background */
   padding: 40px 20px; /* Space inside the timeline section */
+  overflow-x: auto;   /* Enable horizontal scrolling if needed */
+}
+
+/* Timeline cards container for horizontal layout */
+.timeline-cards {
+  display: flex;              /* Arrange cards in a row */
+  gap: 20px;                  /* Space between cards */
+  flex-wrap: nowrap;          /* Prevent wrapping on large screens */
+  overflow-x: auto;           /* Allow horizontal scroll */
+  padding-bottom: 16px;       /* Space below cards for scroll bar */
+}
+
+/* Individual timeline card */
+.timeline-card {
+  background-color: var(--intel-white);         /* White background */
+  border-left: 4px solid var(--intel-light-blue); /* Blue line on the left */
+  min-width: 250px;                             /* Minimum width for card */
+  max-width: 300px;                             /* Maximum width for card */
+  padding: 16px 20px;                           /* Space inside card */
+  margin-bottom: 0;                             /* Remove bottom margin for horizontal */
+  box-sizing: border-box;                       /* Include padding in width */
+  flex-shrink: 0;                               /* Prevent shrinking */
+  border-radius: 8px;                           /* Rounded corners */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);       /* Soft shadow */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;                           /* Needed for details reveal */
+  transition: box-shadow 0.3s;
+}
+
+/* Timeline images */
+.timeline-card img {
+  width: 100%;                        /* Make images fill the card width */
+  max-width: 220px;                   /* Limit image width */
+  display: block;                     /* Block display for spacing */
+  margin: 10px auto;                  /* Center images with margin */
+  border-radius: 8px;                 /* Slightly rounded corners */
+}
+
+/* Timeline headings */
+.timeline-card h2 {
+  color: var(--intel-dark-blue);      /* Dark blue heading */
+  text-align: center;                 /* Center the heading */
+  margin-bottom: 8px;                 /* Space below heading */
+}
+
+.timeline-card h3 {
+  color: var(--intel-blue);           /* Main blue for subheading */
+  text-align: center;                 /* Center the subheading */
+  margin-bottom: 8px;                 /* Space below subheading */
+}
+
+/* Hide details by default, show smoothly on hover */
+.timeline-details {
+  max-height: 0;                      /* Hide content */
+  overflow: hidden;                   /* Prevent overflow */
+  opacity: 0;                         /* Make invisible */
+  transition: max-height 0.4s ease, opacity 0.4s ease;
+  width: 100%;
+}
+
+/* Show details when hovering over the card */
+.timeline-card:hover .timeline-details,
+.timeline-card:focus-within .timeline-details {
+  max-height: 200px;                  /* Enough space for content */
+  opacity: 1;                         /* Make visible */
+}
+
+/* Responsive: Stack timeline vertically on small screens */
+@media (max-width: 700px) {
+  .timeline-cards {
+    display: block;         /* Stack cards vertically */
+    overflow-x: visible;    /* No horizontal scroll */
+  }
+  .timeline-card {
+    max-width: 100%;        /* Full width */
+    margin-bottom: 20px;    /* Space between cards */
+  }
+  .timeline-card:last-child {
+    margin-bottom: 0;
+  }
 }
 
 /* Style images inside the timeline section */
