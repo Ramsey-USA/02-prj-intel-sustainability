@@ -7,37 +7,28 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-
-  <!-- 
-    Header Section: 
-    This section includes the Intel logo, a main headline, and a subheading.
-    All content is centered and uses Intel's brand colors.
-  -->
+  <!-- Header Section -->
   <header>
-    <!-- Intel logo image -->
     <img src="img/intel-header-logo.svg" alt="Intel Logo" />
-    
-    <!-- Main Heading -->
-    <h1>Sustainability Through the Ages</h1>
-    
-    <!-- Subheading / Description -->
-    <p>
-      Explore Intel's journey through time, discovering how our commitment
-      to innovation has shaped a more sustainable future for technology 
-      and our planet.
-    </p>
+    <div class="header-content">
+      <h1>Sustainability Through the Ages</h1>
+      <div class="header-divider"></div>
+      <p>
+        Explore Intel's journey through time, discovering how our commitment
+        to innovation has shaped a more sustainable future for technology 
+        and our planet.
+      </p>
+    </div>
   </header>
 
   <!-- Timeline Section -->
   <section class="timeline">
-    <!-- Container for all timeline cards -->
     <div class="timeline-cards">
-      <!-- Each event is a timeline card -->
+      <!-- Repeat this block for each timeline event -->
       <div class="timeline-card">
         <h2>1968</h2>
         <h3>Intel Founded</h3>
         <img src="img/1.jpg" alt="Intel founders" />
-        <!-- Details are hidden by default, shown on hover -->
         <div class="timeline-details">
           <p>
             Robert Noyce and Gordon Moore rename the newly formed company 
@@ -143,8 +134,12 @@
         </div>
       </div>
     </div>
-    <!-- Simple instruction for users -->
-    <p style="text-align:center; margin-top:16px;">Scroll to view timeline | Hover over cards to learn more!</p>
+    <p class="timeline-instructions">Scroll to view timeline | Hover over cards to learn more!</p>
   </section>
+
+  <!-- Footer Section -->
+  <footer>
+    <p>By Matthew Ramsey &copy; 2025 Intel Sustainability Project. For learning purposes only.</p>
+  </footer>
 </body>
 </html>

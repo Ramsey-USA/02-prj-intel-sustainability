@@ -1,5 +1,4 @@
 /* Import Intel One Mono font for beginners */
-/* Make sure the path matches your project structure */
 @font-face {
   font-family: 'Intel One Mono';
   src: url('fonts/ttf/fonts/ttf/IntelOneMono-Regular.ttf') format('truetype');
@@ -7,122 +6,205 @@
   font-style: normal;
 }
 
+/* Import Roboto font from Google Fonts for the header */
+@import url('https://fonts.googleapis.com/css?family=Roboto:700&display=swap');
+
 /* Intel color scheme variables and basic styles */
 :root {
-  /* Color variables */
-  --intel-blue: #0071c5;        /* Main Intel blue */
-  --intel-light-blue: #00a9e0;  /* Lighter blue */
-  --intel-dark-blue: #003057;   /* Dark blue */
-  --intel-gray: #e6e6e6;        /* Light gray */
-  --intel-white: #ffffff;       /* White */
+  --intel-blue: #0071c5;
+  --intel-light-blue: #00a9e0;
+  --intel-dark-blue: #003057;
+  --intel-gray: #e6e6e6;
+  --intel-white: #ffffff;
 
-  /* Font family */
-  --font-main: 'Intel One Mono', 'Segoe UI', Arial, sans-serif; /* Use Intel One Mono first */
+  --font-main: 'Intel One Mono', 'Segoe UI', Arial, sans-serif;
+  --font-header: 'Roboto', Arial, sans-serif;
 
-  /* Font sizes */
   --font-size-base: 16px;
   --font-size-large: 2em;
   --font-size-medium: 1.2em;
   --font-size-small: 1em;
 
-  /* Margins and padding */
   --margin-base: 16px;
   --margin-small: 8px;
   --padding-base: 16px;
   --padding-small: 8px;
+
+  --timeline-card-min-width: 250px;
+  --timeline-card-max-width: 300px;
+  --timeline-card-img-max-width: 220px;
+  --timeline-container-max-width: 1240px;
+  --timeline-gap: 48px;
+  --timeline-padding-bottom: 24px;
 }
 
-/* Apply the main font and base font size to the whole page */
+/* Make the page always fill the screen vertically */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Use flexbox on the body to stretch content */
 body {
-  font-family: var(--font-main);    /* Use Intel One Mono font */
-  font-size: var(--font-size-base); /* Set the base font size */
-  margin: 0;                        /* Remove default margin */
-  background: var(--intel-white);   /* Set background color */
-  color: var(--intel-dark-blue);    /* Set default text color */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-main);
+  font-size: var(--font-size-base);
+  background: var(--intel-white);
+  color: var(--intel-dark-blue);
 }
 
-/* Header styles for the top of the page */
+/* Header styles */
 header {
-  background-color: var(--intel-blue); /* Intel blue background */
-  color: var(--intel-white);           /* White text for contrast */
-  padding: var(--padding-base) var(--padding-small); /* Space inside header */
-  text-align: center;                  /* Center all content */
+  background-color: var(--intel-blue);
+  color: var(--intel-white);
+  /* Increased top and bottom padding for more space in the header */
+  padding: 80px var(--padding-base) 48px var(--padding-base);
+  text-align: center;
+}
+
+/* Container to condense header text to 800px */
+.header-content {
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 /* Intel logo in the header */
 header img {
-  width: 150px;                        /* Set logo width */
-  display: block;                      /* Make image a block element */
-  margin: 0 auto var(--margin-base) auto; /* Center logo and add space below */
+  width: 170px; /* Slightly larger for emphasis */
+  display: block;
+  margin: 0 auto var(--margin-base) auto;
+  transition: transform 0.3s, box-shadow 0.3s; /* Smooth transition for hover effect */
+}
+
+/* Add a simple hover effect to the Intel logo image */
+header img:hover {
+  transform: scale(1.07) rotate(-2deg); /* Slightly enlarge and rotate */
+  box-shadow: 0 8px 24px rgba(0, 49, 87, 0.15); /* Add a soft shadow */
 }
 
 /* Main headline in the header */
 header h1 {
-  font-size: var(--font-size-large);   /* Large headline */
-  margin-bottom: var(--margin-small);  /* Space below headline */
-  font-weight: bold;                   /* Make headline bold */
+  font-family: var(--font-header);
+  font-size: var(--font-size-large);
+  margin-bottom: var(--margin-small);
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+/* Divider line under the header content */
+.header-divider {
+  width: 80%;
+  max-width: 400px;
+  height: 3px;
+  background: var(--intel-light-blue);
+  margin: 32px auto 0 auto;
+  border-radius: 2px;
+  border: none;
 }
 
 /* Subheading/description in the header */
 header p {
-  font-size: var(--font-size-medium);  /* Medium-sized text */
-  margin-bottom: 0;                    /* No extra space below */
+  font-size: var(--font-size-medium);
+  margin-bottom: 0;
+  font-family: var(--font-main);
 }
 
 /* Hero section styles */
 .hero {
-  background-color: var(--intel-blue); /* Use Intel blue for background */
-  color: var(--intel-white); /* White text */
-  padding: 60px 20px; /* Space inside the hero section */
-  text-align: center; /* Center the text */
+  background-color: var(--intel-blue);
+  color: var(--intel-white);
+  padding: 60px 20px;
+  text-align: center;
 }
 
 /* Style the Intel logo in the hero section */
 .hero img {
-  width: 180px; /* Set a simple width for the logo */
-  display: block; /* Make the image a block element */
-  margin: 0 auto 20px auto; /* Center the logo and add space below */
+  width: 180px;
+  display: block;
+  margin: 0 auto 20px auto;
 }
 
 .hero h1 {
-  font-size: 2.5em; /* Large heading */
-  margin-bottom: 20px; /* Space below heading */
+  font-size: 2.5em;
+  margin-bottom: 20px;
 }
 
 .hero p {
-  font-size: 1.2em; /* Slightly larger text */
-  margin-bottom: 0; /* No extra space below paragraph */
+  font-size: 1.2em;
+  margin-bottom: 0;
 }
 
 /* Timeline section styles */
 .timeline {
-  background-color: var(--intel-gray); /* Light gray background */
-  padding: 40px 20px; /* Space inside the timeline section */
-  overflow-x: auto;   /* Enable horizontal scrolling if needed */
+  background-color: var(--intel-gray);
+  padding: 32px 20px 0 20px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  flex: 1; /* Fills space between header and footer */
+  min-height: 0;
 }
 
 /* Timeline cards container for horizontal layout with smooth scroll snapping */
 .timeline-cards {
-  display: flex;                  /* Arrange cards in a row */
-  gap: 32px;                      /* More space between cards for visual enhancement */
-  flex-wrap: nowrap;              /* Keep all cards in a single line */
-  overflow-x: auto;               /* Allow horizontal scroll if needed */
-  padding-bottom: 24px;           /* Extra space below cards for scroll bar */
-  justify-content: flex-start;    /* Align cards to the left */
-  width: 100%;                    /* Full width of the container */
-  box-sizing: border-box;         /* Include padding in width */
-  scroll-behavior: smooth;        /* Smooth scrolling on all platforms */
-  scroll-snap-type: x mandatory;  /* Enable horizontal scroll snapping */
+  display: flex;
+  gap: 48px; /* Increased gap for more space between cards (was var(--timeline-gap) or 32px) */
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  overflow-y: visible;
+  padding: 40px 0 var(--timeline-padding-bottom) 0; /* Add more top and bottom padding inside the container */
+  justify-content: flex-start;
+  width: 100%;
+  max-width: var(--timeline-container-max-width);
+  margin: 0 auto;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
 }
+
+/* Hide scrollbars for timeline-cards on most browsers for a cleaner look */
+/* This keeps scrolling with touch or mouse, but hides the bar visually */
+
+/* For Chrome, Edge, Safari */
+.timeline-cards::-webkit-scrollbar {
+  height: 8px;              /* Make scrollbar thinner */
+  background: transparent;  /* Hide background */
+}
+.timeline-cards::-webkit-scrollbar-thumb {
+  background: #b3c6d9;      /* Light blue thumb for visibility */
+  border-radius: 4px;
+}
+.timeline-cards::-webkit-scrollbar-track {
+  background: transparent;  /* Hide track */
+}
+
+/* For Firefox */
+.timeline-cards {
+  scrollbar-width: thin;           /* Make scrollbar thinner */
+  scrollbar-color: #b3c6d9 transparent; /* Thumb color and transparent track */
+}
+
+/* Optional: Hide scrollbar completely (uncomment if you want to hide it everywhere) */
+/*
+.timeline-cards {
+  -ms-overflow-style: none;  // IE and Edge
+  scrollbar-width: none;     // Firefox
+}
+.timeline-cards::-webkit-scrollbar {
+  display: none;             // Chrome, Safari, Opera
+}
+*/
 
 /* Each timeline card will snap to the start of the container */
 .timeline-card {
-  scroll-snap-align: start;       /* Snap each card to the start */
-  position: relative; /* Needed for overlay positioning */
+  scroll-snap-align: start;
+  position: relative;
   background-color: var(--intel-white);
   border-left: 4px solid var(--intel-light-blue);
-  min-width: 250px;
-  max-width: 300px;
+  min-width: var(--timeline-card-min-width);
+  max-width: var(--timeline-card-max-width);
   padding: 16px 20px 20px 20px;
   margin-bottom: 0;
   box-sizing: border-box;
@@ -132,93 +214,84 @@ header p {
   display: flex;
   flex-direction: column;
   align-items: center;
-  transition: box-shadow 0.3s;
-  cursor: pointer; /* Pointer cursor for interactivity */
+  transition: box-shadow 0.3s, transform 0.3s;
+  cursor: pointer;
 }
 
-/* Timeline images */
+/* Timeline images inside cards */
 .timeline-card img {
-  width: 100%;                        /* Make images fill the card width */
-  max-width: 220px;                   /* Limit image width */
-  display: block;                     /* Block display for spacing */
-  margin: 10px auto;                  /* Center images with margin */
-  border-radius: 8px;                 /* Slightly rounded corners */
-  position: relative; /* Needed for stacking context */
+  width: 100%;
+  max-width: var(--timeline-card-img-max-width);
+  display: block;
+  margin: 10px auto;
+  border-radius: 8px;
+  position: relative;
   z-index: 1;
 }
 
-/* Timeline headings */
+/* Timeline headings inside cards */
 .timeline-card h2 {
-  color: var(--intel-dark-blue);      /* Dark blue heading */
-  text-align: center;                 /* Center the heading */
-  margin-bottom: 8px;                 /* Space below heading */
+  color: var(--intel-dark-blue);
+  text-align: center;
+  margin-bottom: 8px;
 }
 
 .timeline-card h3 {
-  color: var(--intel-blue);           /* Main blue for subheading */
-  text-align: center;                 /* Center the subheading */
-  margin-bottom: 8px;                 /* Space below subheading */
+  color: var(--intel-blue);
+  text-align: center;
+  margin-bottom: 8px;
 }
 
 /* Hide details by default, show smoothly on hover */
 .timeline-details {
-  max-height: 0;                      /* Hide content */
-  overflow: hidden;                   /* Prevent overflow */
-  opacity: 0;                         /* Make invisible */
-  transition: max-height 0.4s ease, opacity 0.4s ease;
-  width: 100%;
-  transform: translate(-50%, 0) scale(0.98); /* Scale down for effect */
-  transition: opacity 0.4s, transform 0.4s; /* Smooth transition */
-}
-
-/* Show details when hovering over the card */
-.timeline-card:hover .timeline-details,
-.timeline-card:focus-within .timeline-details {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translate(-50%, 0) scale(1);    /* Scale up to normal size */
-}
-
-/* Overlay styles for details */
-.timeline-details {
-  position: absolute; /* Position over the image */
-  top: 38%;           /* Start overlay a bit below the top of the card */
+  position: absolute;
+  top: 38%;
   left: 50%;
-  transform: translate(-50%, 0);
   width: 90%;
-  background: rgba(0, 49, 87, 0.92); /* Semi-transparent Intel dark blue */
+  background: rgba(0, 49, 87, 0.92);
   color: var(--intel-white);
   padding: 12px;
   border-radius: 8px;
-  opacity: 0;         /* Hide by default */
-  pointer-events: none; /* Prevent accidental clicks */
-  transition: opacity 0.4s;
-  z-index: 2;         /* Above the image */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s, transform 0.4s;
+  z-index: 2;
   text-align: center;
-  max-height: 80%;    /* Prevent overlay from being too tall */
-  overflow-y: auto;   /* Scroll if content is too big */
+  max-height: 80%;
+  overflow-y: auto;
+  transform: translate(-50%, 0) scale(0.98);
 }
 
 /* Show overlay on hover or focus */
 .timeline-card:hover .timeline-details,
 .timeline-card:focus-within .timeline-details {
-  opacity: 1;         /* Show overlay */
-  pointer-events: auto; /* Allow interaction */
-  transform: translate(-50%, 0) scale(1); /* Scale to normal size */
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, 0) scale(1);
+}
+
+/* Timeline instructions under the timeline cards */
+.timeline-instructions {
+  text-align: center;           /* Center the text */
+  margin-top: 16px;             /* Add space above */
+  margin-bottom: 16px;          /* Add space below */
+  font-size: var(--font-size-small); /* Use small font size */
+  width: 100%;                  /* Ensure it spans the container */
+  display: block;               /* Make sure it's a block element */
 }
 
 /* Responsive: Stack timeline vertically on small screens */
 @media (max-width: 700px) {
   .timeline-cards {
-    display: block;         /* Stack cards vertically */
-    overflow-x: visible;    /* No horizontal scroll */
-    gap: 0;                 /* Remove gap for vertical layout */
+    display: block;
+    overflow-x: visible;
+    gap: 0;
     padding-bottom: 0;
-    scroll-snap-type: none; /* Disable snapping on small screens */
+    scroll-snap-type: none;
   }
   .timeline-card {
-    max-width: 100%;        /* Full width */
-    margin-bottom: 20px;    /* Space between cards */
+    max-width: 100%;
+    margin-bottom: 20px;
   }
   .timeline-card:last-child {
     margin-bottom: 0;
@@ -231,37 +304,101 @@ header p {
   }
 }
 
-/* Style images inside the timeline section */
+/* Style images inside the timeline section (not in cards) */
 .timeline img {
-  width: 100%; /* Make images fill the card width */
-  max-width: 250px; /* Limit image width */
-  display: block; /* Block display for spacing */
-  margin: 10px auto; /* Center images with margin */
-  border-radius: 8px; /* Slightly rounded corners */
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05); /* Soft shadow for effect */
+  width: 100%;
+  max-width: var(--timeline-img-max-width);
+  display: block;
+  margin: 10px auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
+/* Timeline section headings */
 .timeline h2 {
-  color: var(--intel-dark-blue); /* Dark blue heading */
-  text-align: center; /* Center the heading */
-  margin-bottom: 30px; /* Space below heading */
+  color: var(--intel-dark-blue);
+  text-align: center;
+  margin-bottom: 30px;
 }
 
+/* Timeline list styles (for alternate timeline layouts) */
 .timeline-list {
-  list-style: none; /* Remove default bullets */
-  padding: 0; /* Remove default padding */
-  max-width: 600px; /* Limit width for readability */
-  margin: 0 auto; /* Center the list */
+  list-style: none;
+  padding: 0;
+  max-width: var(--timeline-list-max-width);
+  margin: 0 auto;
 }
 
 .timeline-list li {
-  background-color: var(--intel-white); /* White background for each item */
-  border-left: 4px solid var(--intel-light-blue); /* Blue line on the left */
-  margin-bottom: 20px; /* Space between items */
-  padding: 16px 20px; /* Space inside each item */
-  position: relative; /* For future enhancements */
+  background-color: var(--intel-white);
+  border-left: 4px solid var(--intel-light-blue);
+  margin-bottom: 20px;
+  padding: 16px 20px;
+  position: relative;
 }
 
 .timeline-list li:last-child {
-  margin-bottom: 0; /* No space after last item */
+  margin-bottom: 0;
+}
+
+/* Footer styles */
+footer {
+  background-color: var(--intel-dark-blue);
+  color: var(--intel-white);
+  text-align: center;
+  padding: 8px 0;
+  font-size: var(--font-size-small);
+  margin-top: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+/* Responsive styles for tablets and phones */
+@media (max-width: 900px) {
+  .header-content {
+    max-width: 95%;
+    padding: 0 10px;
+  }
+  .timeline-cards {
+    max-width: 100%;
+    gap: 16px;
+  }
+  .timeline-card {
+    min-width: 220px;
+    max-width: 240px;
+    padding: 12px 10px 16px 10px;
+  }
+}
+
+@media (max-width: 700px) {
+  header {
+    padding: 40px var(--padding-small) 24px var(--padding-small);
+  }
+  .header-divider {
+    margin: 20px auto 0 auto;
+  }
+  .timeline {
+    padding: 16px 5px 0 5px;
+  }
+  .timeline-cards {
+    display: block;
+    overflow-x: visible;
+    gap: 0;
+    padding-bottom: 0;
+    scroll-snap-type: none;
+    max-width: 100%;
+  }
+  .timeline-card {
+    max-width: 100%;
+    min-width: 0;
+    margin-bottom: 20px;
+  }
+  .timeline-card:last-child {
+    margin-bottom: 0;
+  }
+  .timeline-details {
+    top: 38%;
+    left: 50%;
+    width: 96%;
+    font-size: 1em;
+  }
 }
