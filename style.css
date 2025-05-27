@@ -1,12 +1,5 @@
-/* Import Intel One Mono font for beginners */
-@font-face {
-  font-family: 'Intel One Mono';
-  src: url('fonts/ttf/fonts/ttf/IntelOneMono-Regular.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-
-/* Import Roboto font from Google Fonts for the header */
+/* Import Montserrat for main text and Roboto for headers */
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Roboto:700&display=swap');
 
 /* Intel color scheme variables and basic styles */
@@ -17,25 +10,25 @@
   --intel-gray: #e6e6e6;
   --intel-white: #ffffff;
 
-  --font-main: 'Intel One Mono', 'Segoe UI', Arial, sans-serif;
-  --font-header: 'Roboto', Arial, sans-serif;
+  --font-main: 'Montserrat', Arial, sans-serif;      /* Use Montserrat for main text */
+  --font-header: 'Roboto', Arial, sans-serif;        /* Use Roboto for headers */
 
   --font-size-base: 16px;
-  --font-size-large: 2em;
-  --font-size-medium: 1.2em;
+  --font-size-large: 2.3em;      /* Slightly larger for main headings */
+  --font-size-medium: 1.25em;    /* Slightly larger for subheadings */
   --font-size-small: 1em;
 
-  --margin-base: 16px;
-  --margin-small: 8px;
-  --padding-base: 16px;
-  --padding-small: 8px;
+  --margin-base: 20px;           /* More space between sections */
+  --margin-small: 10px;
+  --padding-base: 20px;          /* More padding for sections */
+  --padding-small: 10px;
 
   --timeline-card-min-width: 250px;
   --timeline-card-max-width: 300px;
   --timeline-card-img-max-width: 220px;
   --timeline-container-max-width: 1240px;
-  --timeline-gap: 48px;
-  --timeline-padding-bottom: 24px;
+  --timeline-gap: 56px;          /* More space between cards */
+  --timeline-padding-bottom: 32px;
 }
 
 /* Make the page always fill the screen vertically */
@@ -50,9 +43,9 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  font-family: var(--font-main);
+  font-family: var(--font-main); /* Montserrat for all text by default */
   font-size: var(--font-size-base);
-  background: var(--intel-white);
+  background: linear-gradient(135deg, #e6e6e6 0%, #ffffff 100%);
   color: var(--intel-dark-blue);
 }
 
@@ -60,7 +53,7 @@ body {
 header {
   background-color: var(--intel-blue);
   color: var(--intel-white);
-  padding: 56px var(--padding-base) 32px var(--padding-base);
+  padding: 48px var(--padding-base) 28px var(--padding-base); /* Reduced for balance */
   text-align: center;
 }
 
@@ -68,11 +61,12 @@ header {
 .header-content {
   max-width: 800px;
   margin: 0 auto;
+  padding: var(--padding-small);
 }
 
 /* Intel logo in the header */
 header img {
-  width: 170px;
+  width: 160px;
   display: block;
   margin: 0 auto var(--margin-base) auto;
   transition: transform 0.3s, box-shadow 0.3s;
@@ -86,11 +80,12 @@ header img:hover {
 
 /* Main headline in the header */
 header h1 {
-  font-family: var(--font-header);
+  font-family: var(--font-header);      /* Roboto for header */
   font-size: var(--font-size-large);
   margin-bottom: var(--margin-small);
   font-weight: bold;
-  letter-spacing: 1px;
+  letter-spacing: 2px;                  /* More spacing for a modern look */
+  text-transform: uppercase;            /* Uppercase for emphasis */
 }
 
 /* Divider line under the header content */
@@ -99,7 +94,7 @@ header h1 {
   max-width: 400px;
   height: 3px;
   background: var(--intel-light-blue);
-  margin: 32px auto 0 auto;
+  margin: 28px auto 0 auto;
   border-radius: 2px;
   border: none;
 }
@@ -108,7 +103,10 @@ header h1 {
 header p {
   font-size: var(--font-size-medium);
   margin-bottom: 0;
-  font-family: var(--font-main);
+  margin-top: var(--margin-small);
+  font-family: var(--font-main); /* Montserrat for paragraph */
+  color: #e0f7fa;                /* Lighter color for contrast */
+  letter-spacing: 1px;
 }
 
 /* Timeline section styles */
@@ -127,8 +125,8 @@ header p {
   gap: var(--timeline-gap);
   flex-wrap: nowrap;
   overflow-x: auto;
-  overflow-y: visible;
-  padding: 40px 0 var(--timeline-padding-bottom) 0;
+  overflow-y: unset;
+  padding: 36px 0 var(--timeline-padding-bottom) 0;
   justify-content: flex-start;
   width: 100%;
   max-width: var(--timeline-container-max-width);
@@ -161,17 +159,18 @@ header p {
   border-left: 4px solid var(--intel-light-blue);
   min-width: var(--timeline-card-min-width);
   max-width: var(--timeline-card-max-width);
-  padding: 16px 20px 20px 20px;
+  padding: 18px 22px 22px 22px; /* More padding for space */
   margin-bottom: 0;
   box-sizing: border-box;
   flex-shrink: 0;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  border-radius: 12px; /* More rounded corners */
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08); /* Softer shadow */
   display: flex;
   flex-direction: column;
   align-items: center;
   transition: box-shadow 0.3s, transform 0.3s;
   cursor: pointer;
+  font-family: var(--font-main); /* Montserrat for card text */
 }
 
 /* Add hover effect to timeline cards */
@@ -180,27 +179,41 @@ header p {
   transform: translateY(-4px) scale(1.03);
 }
 
+/* Focus effect for timeline cards */
+.timeline-card:focus-within {
+  outline: 2px solid var(--intel-light-blue);
+  outline-offset: 4px;
+}
+
 /* Timeline images inside cards */
 .timeline-card img {
   width: 100%;
   max-width: var(--timeline-card-img-max-width);
   display: block;
-  margin: 10px auto;
+  margin: 12px auto 16px auto;
   border-radius: 8px;
   position: relative;
   z-index: 1;
 }
 
 /* Timeline headings inside cards */
+.timeline-card h2,
+.timeline-card h3 {
+  font-family: var(--font-header); /* Roboto for headings in cards */
+}
 .timeline-card h2 {
-  color: var(--intel-dark-blue);
+  color: var(--intel-light-blue);    /* Accent color for year */
+  font-size: 1.4em;
   text-align: center;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
+  letter-spacing: 1px;
 }
 .timeline-card h3 {
   color: var(--intel-blue);
+  font-size: 1.1em;
   text-align: center;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
 }
 
 /* Hide details by default, show smoothly on hover */
@@ -221,6 +234,8 @@ header p {
   max-height: 80%;
   overflow-y: auto;
   transform: translate(-50%, 0) scale(0.98);
+  font-family: var(--font-main); /* Montserrat for details */
+  font-size: 1em;
 }
 
 /* Show overlay on hover or focus */
@@ -232,26 +247,22 @@ header p {
 }
 
 /* Timeline instructions under the timeline cards */
-/* This makes sure the instructions are always visible and not hidden by overflow */
 .timeline-instructions {
-  text-align: center;                  /* Center the text */
-  margin-top: 24px;                    /* Space above */
-  margin-bottom: 0;                    /* No extra space below */
-  font-size: var(--font-size-medium);  /* Medium font size for visibility */
-  color: var(--intel-dark-blue);       /* Dark blue text for contrast */
-  background: transparent;             /* No background */
-  display: block;                      /* Block element for full width */
-  position: static;                    /* Remove relative/absolute positioning */
-  z-index: auto;                       /* Remove z-index */
-  font-weight: bold;                   /* Make it stand out */
-  /* Remove any overflow or height restrictions from parent containers */
+  text-align: center;
+  margin-top: 28px;
+  margin-bottom: 0;
+  font-size: 1.1em;
+  color: var(--intel-dark-blue);
+  background: transparent;
+  display: block;
+  font-weight: bold;
+  font-family: var(--font-header); /* Roboto for instructions */
+  letter-spacing: 1px;
 }
 
 /* Make sure .timeline-cards does not have too much bottom padding */
 .timeline-cards {
-  /* ...existing styles... */
-  padding-bottom: 16px; /* Reduce if it was larger */
-  /* Remove overflow-y: visible; if present */
+  padding-bottom: 16px;
   overflow-y: unset;
 }
 
@@ -270,6 +281,7 @@ header p {
   color: var(--intel-dark-blue);
   text-align: center;
   margin-bottom: 30px;
+  font-family: var(--font-header); /* Roboto for section headings */
 }
 
 /* Timeline list styles (for alternate timeline layouts) */
@@ -278,6 +290,7 @@ header p {
   padding: 0;
   max-width: 600px;
   margin: 0 auto;
+  font-family: var(--font-main); /* Montserrat for list text */
 }
 .timeline-list li {
   background-color: var(--intel-white);
@@ -295,10 +308,11 @@ footer {
   background-color: var(--intel-dark-blue);
   color: var(--intel-white);
   text-align: center;
-  padding: 8px 0;
+  padding: 10px 0;
   font-size: var(--font-size-small);
   margin-top: 0;
-  font-family: var(--font-main);
+  font-family: var(--font-main); /* Montserrat for footer */
+  letter-spacing: 1px;
 }
 
 /* Responsive styles for tablets and phones */
@@ -309,7 +323,7 @@ footer {
   }
   .timeline-cards {
     max-width: 100%;
-    gap: 16px;
+    gap: 20px;
   }
   .timeline-card {
     min-width: 220px;
@@ -320,13 +334,13 @@ footer {
 
 @media (max-width: 700px) {
   header {
-    padding: 40px var(--padding-small) 24px var(--padding-small);
+    padding: 28px var(--padding-small) 16px var(--padding-small);
   }
   .header-divider {
-    margin: 20px auto 0 auto;
+    margin: 16px auto 0 auto;
   }
   .timeline {
-    padding: 16px 5px 0 5px;
+    padding: 12px 5px 0 5px;
   }
   .timeline-cards {
     display: block;
@@ -339,7 +353,7 @@ footer {
   .timeline-card {
     max-width: 100%;
     min-width: 0;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
   }
   .timeline-card:last-child {
     margin-bottom: 0;
