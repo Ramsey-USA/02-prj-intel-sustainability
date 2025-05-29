@@ -141,17 +141,30 @@ header p {
   scroll-snap-type: x mandatory;  /* Snap cards into place horizontally */
 }
 
-/* Show scrollbars in all browsers for clarity */
+/* Style the horizontal scrollbar for timeline-cards */
 .timeline-cards::-webkit-scrollbar {
-  height: 8px;
-  background: #e6e6e6;
+  height: 10px; /* Make the scrollbar a bit thicker */
+  background: #e6e6e6; /* Light background for the track */
+  border-radius: 5px;  /* Rounded corners for the track */
 }
+
+/* Style the draggable part of the scrollbar */
 .timeline-cards::-webkit-scrollbar-thumb {
-  background: #b3c6d9;
-  border-radius: 4px;
+  background: var(--intel-light-blue); /* Use an accent color */
+  border-radius: 5px;                  /* Rounded corners for the thumb */
+  border: 2px solid #e6e6e6;           /* Soft border for contrast */
+  transition: background 0.3s;
 }
-.timeline-cards::-webkit-scrollbar-track {
-  background: #e6e6e6;
+
+/* Change color when hovering over the scrollbar thumb */
+.timeline-cards::-webkit-scrollbar-thumb:hover {
+  background: var(--intel-blue);       /* Darker blue on hover */
+}
+
+/* For Firefox */
+.timeline-cards {
+  scrollbar-color: var(--intel-light-blue) #e6e6e6; /* thumb color, track color */
+  scrollbar-width: thin;                            /* Make it thinner */
 }
 
 /* Each timeline card will snap to the start of the container */
