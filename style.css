@@ -31,11 +31,13 @@
   --timeline-padding-bottom: 32px;
 }
 
-/* Make the page always fill the screen vertically */
+/* Make the page always fill the screen vertically and prevent unwanted scrollbars */
 html, body {
   height: 100%;
   margin: 0;
   padding: 0;
+  overflow-x: hidden; /* Prevent horizontal scroll bar */
+  box-sizing: border-box; /* Include padding/border in width */
 }
 
 /* Use flexbox on the body to stretch content */
@@ -47,11 +49,14 @@ body {
   font-size: var(--font-size-base);
   background: linear-gradient(135deg, #e6e6e6 0%, #ffffff 100%);
   color: var(--intel-dark-blue);
+  width: 100vw;        /* Always fit the viewport width */
+  max-width: 100vw;    /* Prevent content from exceeding viewport */
+  overflow-x: hidden;  /* Hide any accidental horizontal overflow */
 }
 
 /* Header styles */
 header {
-  background-color: var(--intel-blue);
+  background: linear-gradient(135deg, var(--intel-blue) 70%, var(--intel-light-blue) 100%);
   color: var(--intel-white);
   padding: 48px var(--padding-base) 28px var(--padding-base); /* Reduced for balance */
   text-align: center;
@@ -113,64 +118,62 @@ header p {
 .timeline {
   background-color: var(--intel-gray);
   padding: 32px 20px 0 20px;
-  overflow-x: auto;
-  overflow-y: hidden;
+  overflow-x: auto;      /* Allow horizontal scrolling if needed */
+  /* Do not hide overflow-y, so scrollbars show if needed */
   flex: 1;
   min-height: 0;
+  width: 100%;           /* Make sure it can expand */
 }
 
-/* Timeline cards container for horizontal layout with smooth scroll snapping */
+/* Timeline cards container for horizontal scroll and smooth snapping */
 .timeline-cards {
-  display: flex;
-  gap: var(--timeline-gap);
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  overflow-y: unset;
+  display: flex;                  /* Arrange cards in a row */
+  flex-direction: row;            /* Horizontal layout */
+  gap: var(--timeline-gap);       /* Space between cards */
+  overflow-x: auto;               /* Enable horizontal scrolling */
+  overflow-y: visible;
   padding: 36px 0 var(--timeline-padding-bottom) 0;
-  justify-content: flex-start;
   width: 100%;
   max-width: var(--timeline-container-max-width);
   margin: 0 auto;
   box-sizing: border-box;
-  scroll-behavior: smooth;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: thin;
-  scrollbar-color: #b3c6d9 transparent;
+  scroll-behavior: smooth;        /* Smooth scrolling */
+  scroll-snap-type: x mandatory;  /* Snap cards into place horizontally */
 }
 
-/* Hide scrollbars for timeline-cards on most browsers for a cleaner look */
+/* Show scrollbars in all browsers for clarity */
 .timeline-cards::-webkit-scrollbar {
   height: 8px;
-  background: transparent;
+  background: #e6e6e6;
 }
 .timeline-cards::-webkit-scrollbar-thumb {
   background: #b3c6d9;
   border-radius: 4px;
 }
 .timeline-cards::-webkit-scrollbar-track {
-  background: transparent;
+  background: #e6e6e6;
 }
 
 /* Each timeline card will snap to the start of the container */
 .timeline-card {
-  scroll-snap-align: start;
+  min-width: var(--timeline-card-min-width);
+  max-width: var(--timeline-card-max-width);
+  flex-shrink: 0;                 /* Prevent cards from shrinking */
+  scroll-snap-align: start;       /* Snap each card to the start */
   position: relative;
   background-color: var(--intel-white);
   border-left: 4px solid var(--intel-light-blue);
-  min-width: var(--timeline-card-min-width);
-  max-width: var(--timeline-card-max-width);
-  padding: 18px 22px 22px 22px; /* More padding for space */
+  padding: 18px 22px 22px 22px;
   margin-bottom: 0;
   box-sizing: border-box;
-  flex-shrink: 0;
-  border-radius: 12px; /* More rounded corners */
-  box-shadow: 0 4px 16px rgba(0,0,0,0.08); /* Softer shadow */
   display: flex;
   flex-direction: column;
   align-items: center;
   transition: box-shadow 0.3s, transform 0.3s;
   cursor: pointer;
-  font-family: var(--font-main); /* Montserrat for card text */
+  font-family: var(--font-main);
+  border-radius: 14px;
+  box-shadow: 0 4px 16px rgba(0,49,87,0.10);
 }
 
 /* Add hover effect to timeline cards */
@@ -202,16 +205,16 @@ header p {
   font-family: var(--font-header); /* Roboto for headings in cards */
 }
 .timeline-card h2 {
-  color: var(--intel-light-blue);    /* Accent color for year */
-  font-size: 1.4em;
-  text-align: center;
-  margin-bottom: 4px;
-  letter-spacing: 1px;
+  color: var(--intel-light-blue);
+  font-size: 2em;
+  margin-bottom: 0;
+  margin-top: 8px;
 }
 .timeline-card h3 {
+  font-size: 1.3em;      /* Change this value to make the event title larger or smaller */
   color: var(--intel-blue);
-  font-size: 1.1em;
   text-align: center;
+  margin-top: 0;      /* Remove space above h3 */
   margin-bottom: 10px;
   letter-spacing: 1px;
 }
@@ -313,6 +316,7 @@ footer {
   margin-top: 0;
   font-family: var(--font-main); /* Montserrat for footer */
   letter-spacing: 1px;
+  border-top: 2px solid #e6e6e6;
 }
 
 /* Responsive styles for tablets and phones */
@@ -322,8 +326,8 @@ footer {
     padding: 0 10px;
   }
   .timeline-cards {
-    max-width: 100%;
     gap: 20px;
+    max-width: 100%;
   }
   .timeline-card {
     min-width: 220px;
@@ -332,6 +336,7 @@ footer {
   }
 }
 
+/* On small screens, stack timeline cards vertically */
 @media (max-width: 700px) {
   header {
     padding: 28px var(--padding-small) 16px var(--padding-small);
@@ -343,17 +348,17 @@ footer {
     padding: 12px 5px 0 5px;
   }
   .timeline-cards {
-    display: block;
-    overflow-x: visible;
+    display: block;               /* Stack cards vertically */
+    overflow-x: visible;          /* No horizontal scroll */
     gap: 0;
     padding-bottom: 0;
-    scroll-snap-type: none;
+    scroll-snap-type: none;       /* Disable snapping on small screens */
     max-width: 100%;
   }
   .timeline-card {
     max-width: 100%;
     min-width: 0;
-    margin-bottom: 16px;
+    margin-bottom: 16px;          /* Space between stacked cards */
   }
   .timeline-card:last-child {
     margin-bottom: 0;
