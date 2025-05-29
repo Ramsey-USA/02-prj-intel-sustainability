@@ -187,6 +187,8 @@ header p {
   font-family: var(--font-main);
   border-radius: 14px;
   box-shadow: 0 4px 16px rgba(0,49,87,0.10);
+  position: relative;   /* Already set, but important for stacking */
+  z-index: 1;           /* Default stacking */
 }
 
 /* Add hover effect to timeline cards */
@@ -199,6 +201,12 @@ header p {
 .timeline-card:focus-within {
   outline: 2px solid var(--intel-light-blue);
   outline-offset: 4px;
+}
+
+/* Raise the card and overlay above others when hovered or focused */
+.timeline-card:hover,
+.timeline-card:focus-within {
+  z-index: 10;          /* Bring hovered card to the front */
 }
 
 /* Timeline images inside cards */
@@ -233,25 +241,30 @@ header p {
 }
 
 /* Hide details by default, show smoothly on hover */
+/* Make the timeline-details cover the entire card when displayed */
+/* Beginner-friendly: This overlay will cover the whole card with the info */
 .timeline-details {
   position: absolute;
-  top: 38%;
-  left: 50%;
-  width: 90%;
-  background: rgba(0, 49, 87, 0.92);
+  top: 0;                  /* Start at the very top of the card */
+  left: 0;                 /* Start at the very left of the card */
+  width: 100%;             /* Cover the full width of the card */
+  height: 100%;            /* Cover the full height of the card */
+  background: rgba(0, 49, 87, 0.92); /* Dark blue with transparency */
   color: var(--intel-white);
-  padding: 12px;
-  border-radius: 8px;
+  padding: 24px 16px;      /* Padding for readability */
+  border-radius: 14px;     /* Match the card's rounded corners */
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.4s, transform 0.4s;
+  transition: opacity 0.4s;
   z-index: 2;
   text-align: center;
-  max-height: 80%;
   overflow-y: auto;
-  transform: translate(-50%, 0) scale(0.98);
-  font-family: var(--font-main); /* Montserrat for details */
+  font-family: var(--font-main);
   font-size: 1em;
+  box-sizing: border-box;
+  display: flex;           /* Use flex to center content */
+  align-items: center;     /* Vertically center */
+  justify-content: center; /* Horizontally center */
 }
 
 /* Show overlay on hover or focus */
@@ -259,7 +272,22 @@ header p {
 .timeline-card:focus-within .timeline-details {
   opacity: 1;
   pointer-events: auto;
-  transform: translate(-50%, 0) scale(1);
+}
+
+/* Responsive: Make sure overlay fits and is centered on small screens */
+@media (max-width: 700px) {
+  .timeline-details {
+    padding: 12px 4px;      /* Less padding on small screens */
+    font-size: 0.98em;      /* Slightly smaller text */
+    border-radius: 10px;    /* Slightly less rounding */
+    left: 0;                /* Always start at left edge */
+    width: 100%;            /* Always cover the card */
+    top: 0;                 /* Always start at top edge */
+    height: 100%;           /* Always cover the card */
+    align-items: center;    /* Vertically center */
+    justify-content: center;/* Horizontally center */
+    transform: none;        /* No shifting */
+  }
 }
 
 /* Timeline instructions under the timeline cards */
@@ -377,9 +405,10 @@ footer {
     margin-bottom: 0;
   }
   .timeline-details {
-    top: 38%;
-    left: 50%;
-    width: 96%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     font-size: 1em;
   }
 }
